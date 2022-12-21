@@ -46,6 +46,56 @@ the `Serverless Customer Address`.
 ![ses-verify](Docs/ses-verify.png)
 
 ## Add a email lambda function
+![ARCHITECTURE-STAGE2](Docs/ARCHITECTURE-STAGE2.png)
+- Step 1; Create the lambda execution Role for lambda;
+We need to create an IAM role which the email_reminder_lambda will use to interact with other AWS services.
+![lambda-role](Docs/lambda-role.png)
+
+Make sure it provides SES, SNS and Logging permissions to whatever assumes this role.
+![lambda-per](Docs/lambda-per.png)
+
+- Step 2; Create the email_reminder_lambda function;
+Here, we're going to create the lambda function which will will be used by the serverless application to create an email and then send it using SES.
+Move to the lambda console https://console.aws.amazon.com/lambda/home?region=us-east-1#/functions.
+Click on Create Function.
+Select Author from scratch.
+For Function name enter `email_reminder_lambda` and for runtime click the dropdown and pick Python 3.9.
+Expand Change default execution role.
+Pick to Use an existing Role.
+Click the Existing Role dropdown and pick LambdaRole (there will be randomness and thats ok).
+Click Create Function
+![lambda-reminder](Docs/lambda-reminder.png)
+
+- Step 3; Configure the email_reminder_lambda function;
+Scroll down, to Function code in the lambda_function code box, select all the code and delete it.
+Replace with this code;
+```
+import boto3, os, json
+
+FROM_EMAIL_ADDRESS = 'REPLACE_ME'
+
+ses = boto3.client('ses')
+
+def lambda_handler(event, context):
+    # Print event data to logs .. 
+    print("Received event: " + json.dumps(event))
+    # Publish message directly to email, provided by EmailOnly or EmailPar TASK
+    ses.send_email( Source=FROM_EMAIL_ADDRESS,
+        Destination={ 'ToAddresses': [ event['Input']['email'] ] }, 
+        Message={ 'Subject': {'Data': 'Whiskers Commands You to attend!'},
+            'Body': {'Text': {'Data': event['Input']['message']}}
+        }
+    )
+    return 'Success!'
+  ```
+
+This function will send an email to an address it's supplied with (by step functions) and it will be FROM the email address we specify.
+Select `REPLACE_ME` and replace with the Serverless Sending Address which you noted down in STAGE1.
+Click Deploy to configure the lambda function.
+Scroll all the way to the top, and click the copy icon next to the lambda function ARN.
+Note this ARN down somewhere same as the email_reminder_lambda ARN.
+
+![lambda-deploy](Docs/lambda-deploy.png)
 
 ## Implement and configure the state machine
 
