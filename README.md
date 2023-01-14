@@ -388,7 +388,7 @@ Click `PetCuddleOTron` at the top of the page
 Click on the `Logging` Tab  
 Because the roles you created had `CWLogs` permissions the state machine is able to log to CWLogs
 Review the logs and ensure you are happy with the flow.  
-![s3-bucket](Docs/s3-bucket-11.png)
+
 
 - FINISH
 
