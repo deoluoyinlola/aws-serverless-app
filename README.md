@@ -350,9 +350,10 @@ When you click buttons .. that calls the `.js` file which is the starting point 
 ![s3-bucket](Docs/s3-bucket-4.png)
 
 Ok to test the application
-Enter an amount of time until the next cuddle ...I suggest `120` seconds
-Enter a message, i suggest `HUMAN COME HOME NOW`  
+Enter an amount of time until the next cuddle ...I suggest `100` seconds
+Enter a message, i suggest `HOME IS YOURS NOW`  
 then enter the `PetCuddleOTron Customer Address` in the email box, this is the email which you verified right at the start as the customer for this application.  
+![s3-bucket](Docs/s3-bucket-6.png)
 
 **before you do the next step and click the button on the application, if you want to see how the application works do the following**
 open a new tab to the `Step functions console` https://console.aws.amazon.com/states/home?region=us-east-1#/statemachines  
@@ -367,21 +368,27 @@ Got back to the Step functions console
 make sure the `Executions` Tab is selected
 click the `Refresh` Icon
 Click the `execution`  
+![s3-bucket](Docs/s3-bucket-7.png)
+
 Watch the graphic .. see how the `Timer state` is highlighted
 The step function is now executing and it has its own state ... its a serverless flow.
-Keep waiting, and after 120 seconds the visual will update showing the flow through the state machine
+Keep waiting, and after 100 seconds the visual will update showing the flow through the state machine
 
-- Timer .. waits 120 seconds
+- Timer .. waits 100 seconds
 - `Email` invokes the lambda function to send an email
 - `NextState` in then moved through, then finally `END`
-
+![s3-bucket](Docs/s3-bucket-8.png)
+![s3-bucket](Docs/s3-bucket-9.png)
 Scroll to the top, click `ExeuctionInput` and you can see the information entered on the webpage.
 This was send it, via the `JS` running in browser, to the API gateway, to the `api_lambda` then through to the `statemachine`
+
+![s3-bucket](Docs/s3-bucket-10.png)
 
 Click `PetCuddleOTron` at the top of the page  
 Click on the `Logging` Tab  
 Because the roles you created had `CWLogs` permissions the state machine is able to log to CWLogs
 Review the logs and ensure you are happy with the flow.  
+![s3-bucket](Docs/s3-bucket-11.png)
 
 - FINISH
 
