@@ -200,6 +200,8 @@ For `API name*` enter `petcuddleotron`
 for `Endpoint Type` pick `Regional` 
 Click `create API`  
 
+![api-gateway](Docs/api-gateway-5.png)
+
 - step 4; CREATE RESOURCE
 
 Click the `Actions` dropdown and Click `Create Resource`  
@@ -225,7 +227,9 @@ Make sure that `Use Default Timeout` box **IS** ticked.
 Make sure that `Use Lambda Proxy integration` box **IS** ticked, this makes sure that all of the information provided to this API is sent on to lambda for processing in the `event` data structure.  
 **if you don't tick this box, the API will fail**  
 Click `Save`  
+![api-gateway](Docs/api-gateway-6.png)
 You may see a dialogue stating `You are about to give API Gateway permission to invoke your Lambda function:`. AWS is asking for your OK to adjust the `resource policy` on the lambda function to allow API Gateway to invoke it.  This is a different policy to the `execution role policy` which controls the permissions lambda gets.  
+![api-gateway](Docs/api-gateway-7.png)
 
 
 - step 6; DEPLOY API  
@@ -235,6 +239,8 @@ Click `Actions` Dropdown and `Deploy API`
 For `Deployment Stage` select `New Stage`  
 for stage name and stage description enter `prod`  
 Click `Deploy`  
+
+![api-gateway](Docs/api-gateway-8.png)
 
 At the top of the screen will be an `Invoke URL` .. note this down somewhere safe, you will need it in the next STAGE.  
 This URL will be used by the client side component of the serverless application and this will be unique to you.    
