@@ -157,6 +157,8 @@ First you will create the supporting `API_LAMBDA` and then the `API Gateway`
 - step 1; CREATE API LAMBDA FUNCTION WHICH SUPPORTS API GATEWAY
 
 Move to the Lambda console https://console.aws.amazon.com/lambda/home?region=us-east-1#/functions  
+![api-gateway](Docs/api-gateway-1.png)
+
 Click on `Create Function`  
 for `Function Name` use `api_lambda`  
 for `Runtime` use `Python 3.9`  
@@ -164,15 +166,14 @@ Expand `Change default execution role`
 Select `Use an existing role`  
 Choose the `LambdaRole` from the dropdown  
 Click `Create Function`  
-
+![api-gateway](Docs/api-gateway-2.png)
 
 This is the lambda function which will support the API Gateway
 
 - step 2; CONFIGURE THE LAMBDA FUNCTION (Using the current UI)
 
 Scroll down, and remove all the code from the `lambda_function` text box  
-Open this link in a new tab https://learn-cantrill-labs.s3.amazonaws.com/aws-serverless-pet-cuddle-o-tron/api_lambda.py
-depending on your browser it might download the .py file, if so, open it in either your code editor, or notepad on windows, or textedit on a mac and copy it all into your clipboard
+Open the api_lambda.py from the Docs dir.
 Move back to the Lambda console.  
 Select the existing lambda code and delete it.  
 Paste the code into the lambda fuction.  
@@ -183,7 +184,8 @@ It accepts some information from you, via API Gateway and then it starts a state
 
 You need to locate the `YOUR_STATEMACHINE_ARN` placeholder and replace this with the State Machine ARN you noted down in the previous step.  
 Click `Deploy` to save the lambda function and configuration.     
-
+![api-gateway](Docs/api-gateway-3.png)
+![api-gateway](Docs/api-gateway-4.png)
 
 - step 3; CREATE API
 
@@ -248,11 +250,11 @@ You now have :-
 - A State Machine configured which can send EMAIL after a certain time period when invoked.
 - An API, Resource & Method, which use a lambda function for backing deployed out to the PROD stage of API Gateway
 
-In STAGE5 of this advanced demo you will configure the client side of the application (loaded from S3, running in a browser) so that it communicates to API Gateway.
 
 ![state-machine](Docs/state-mach.png)
 
 ## Implement the static frontend application
+![ARCHITECTURE-STAGE5](Docs/ARCHITECTURE-STAGE5.png)
 In this stage of the application you will create an S3 bucket and static website hosting which will host the application front end.  
 You will download the source files for the front end, configure them to connect to your specific API gateway and then upload them to S3.
 Finally, you will run some application tests to verify its functionality.
