@@ -256,9 +256,6 @@ You now have :-
 - A State Machine configured which can send EMAIL after a certain time period when invoked.
 - An API, Resource & Method, which use a lambda function for backing deployed out to the PROD stage of API Gateway
 
-
-![state-machine](Docs/state-mach.png)
-
 ## Implement the static frontend application
 ![ARCHITECTURE-STAGE5](Docs/ARCHITECTURE-STAGE5.png)
 In this stage of the application you will create an S3 bucket and static website hosting which will host the application front end.  
@@ -275,6 +272,7 @@ Scroll Down and **UNTICK** `Block all public access`
 Tick the box under `Turning off block all public access might result in this bucket and the objects within becoming public` to acknowledge you understand that you can make the bucket public.  
 Scroll Down to the bottom and click `Create bucket`  
 
+![s3-bucket](Docs/s3-bucket-1.png)
 
 - step 2; SET THE BUCKET AS PUBLIC
 
@@ -302,7 +300,7 @@ in the box, paste the code below
 ```
 Replace the `REPLACEME_PET_CUDDLE_O_TRON_BUCKET_ARN` (being careful NOT to include the `/*`) with the bucket ARN, which you can see near to `Bucket ARN `
 Click `Save Changes`  
-
+![s3-bucket](Docs/s3-bucket-2.png)
 
 - step 3; ENABLE STATIC HOSTING
 Next you need to enable static hosting on the S3 bucket so that it can be used as a front end website.  
@@ -315,11 +313,11 @@ For both `Index Document` and `Error Document` enter `index.html`
 Click `Save Changes`  
 Scroll down and locate `Static website hosting` again.  
 Under `Bucket Website Endpoint` copy and note down the bucket endpoint URL.  
-
+![s3-bucket](Docs/s3-bucket-3.png)
 
 - step 4; DOWNLOAD AND EDIT THE FRONT END FILES
 
-Download and extra this ZIP file https://learn-cantrill-labs.s3.amazonaws.com/aws-serverless-pet-cuddle-o-tron/serverless_frontend.zip
+Download the following file from Docs dir;
 Inside the serverless_frontend folder are the front end files for the serverless website :-
 
 - index.html .. the main index page
@@ -349,6 +347,7 @@ Verify All 4 files are in the `Objects` area of the bucket.
 Open the `PetCuddleOTron URL` you just noted down in a new tab.  
 What you are seeing is a simple HTML web page created by the HTML file itself and the `main.css` stylesheet.
 When you click buttons .. that calls the `.js` file which is the starting point for the serverless application
+![s3-bucket](Docs/s3-bucket-4.png)
 
 Ok to test the application
 Enter an amount of time until the next cuddle ...I suggest `120` seconds
